@@ -1,6 +1,8 @@
 package com.example.trytwo.services.implmentation;
 
-public class TokenServiceImpl
+import com.example.trytwo.services.TokenService;
+
+public class TokenServiceImpl implements TokenService
 {
 
 }

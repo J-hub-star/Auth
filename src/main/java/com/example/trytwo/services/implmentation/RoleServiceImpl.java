@@ -1,4 +1,6 @@
 package com.example.trytwo.services.implmentation;
 
-public class RoleServiceImpl {
+import com.example.trytwo.services.RoleService;
+
+public class RoleServiceImpl implements RoleService {
 }

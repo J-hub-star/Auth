@@ -1,4 +1,6 @@
 package com.example.trytwo.services.implmentation;
 
-public class UserServiceImpl {
+import com.example.trytwo.services.UserService;
+
+public class UserServiceImpl implements UserService {
 }
