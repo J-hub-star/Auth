@@ -1,5 +1,5 @@
 server:
-  port:9999
+
 
 spring:
   data:
@@ -9,4 +9,4 @@ spring:
 
 jwt:
   secret:
-    key: 1ejnj4njbng234n2jn13
+    key: 1ejnj4njbng234n2jn13jsnfkrwbtir42jbnkghbkw3rbtk4

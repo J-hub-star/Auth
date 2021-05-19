@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService
         user.setRole(roleRepo.findAll().stream().map(Role::getRole).filter(role -> role.contains("USER")).collect(Collectors.toList()));
         tokenService.generateToken(user);
         userRepo.save(user);
+        uid.setPassword("");
         modelMapper.map(user,uid);
     }
 
