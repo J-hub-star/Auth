@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class UserInfoDto
 {
+    private String id;
     private String username;
     private String token;
     private String password;

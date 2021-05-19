@@ -1,7 +1,9 @@
 package com.example.trytwo.controller;
 
 import com.example.trytwo.Dto.RolesInfoDto;
+import com.example.trytwo.services.RoleService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,16 +11,18 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class RoleController
 {
+    @Autowired
+    RoleService roleService;
+
     @PostMapping("/addRoles")
-    public RolesInfoDto addRoles(@RequestBody RolesInfoDto rolesInfoDto)
+    public void addRoles(@RequestBody RolesInfoDto rolesInfoDto)
     {
-        System.out.println(rolesInfoDto.getRole());
-        return null;
+        roleService.createRole(rolesInfoDto);
     }
 
     @GetMapping("/roles/{role_id}")
     public RolesInfoDto getRole(@PathVariable String role_id)
     {
-        return null;
+        return roleService.getRole(role_id);
     }
 }

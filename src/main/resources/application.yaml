@@ -6,3 +6,7 @@ spring:
     mongodb:
       host: mongodb://localhost:27017
       database: auth-demo
+
+jwt:
+  secret:
+    key: 1ejnj4njbng234n2jn13
