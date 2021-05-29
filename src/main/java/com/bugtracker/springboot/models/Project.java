@@ -23,6 +23,9 @@ public class Project implements Serializable
     private String project_name;
     @NotNull(message = "Repository Link is required")
     private String github_link;
+    @NotNull(message = "Identifier has to be unique")
+    @Column(updatable = false, unique = true)
+    private String projectIdentifier;
     //bidirectional relational model
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "project")
     private Set<Bug> bugs;
