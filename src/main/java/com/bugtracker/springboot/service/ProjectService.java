@@ -17,14 +17,15 @@ public class ProjectService
     @Autowired
     private ProjectRepo projectRepo;
 
-    public Project createProject(ProjectDto projectDto)
+    public Project createProject(Project project)
     {
-        Project project = new Project();
-        project.setGithub_link(projectDto.getLink());
-        project.setProject_name(projectDto.getName());
+        Project project1 = new Project();
+        project.setGithub_link(project.getGithub_link());
+        project.setProject_name(project.getProject_name());
         project.setBugs(null);
         project.setTodos(null);
-        return projectRepo.save(project);
+        return projectRepo.save(project1);
+
     }
 
     //Find all the projects

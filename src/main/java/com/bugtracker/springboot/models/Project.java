@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -19,10 +21,14 @@ public class Project implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long project_id;
     private String project_name;
+    @NotNull(message = "Repository Link is required")
     private String github_link;
     //bidirectional relational model
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "project")
     private Set<Bug> bugs;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "project")
     private Set<Bug> todos;
+    private Date startedAt;
+    private Date createdOn;
+
 }
