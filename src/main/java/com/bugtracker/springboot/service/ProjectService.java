@@ -2,6 +2,7 @@ package com.bugtracker.springboot.service;
 
 
 import com.bugtracker.springboot.dto.ProjectDto;
+import com.bugtracker.springboot.extras.ProjectIdException;
 import com.bugtracker.springboot.models.Project;
 import com.bugtracker.springboot.repository.ProjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,13 @@ public class ProjectService
 
     public Project createProject(Project project)
     {
-        Project project1 = new Project();
-        project.setGithub_link(project.getGithub_link());
-        project.setProject_name(project.getProject_name());
-        project.setBugs(null);
-        project.setTodos(null);
-        return projectRepo.save(project1);
+        try{
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepo.save(project);
+        }catch (Exception e){
+            throw new ProjectIdException("Project ID '"+project.getProjectIdentifier().toUpperCase()+"' already exists");
+        }
+
 
     }
 
