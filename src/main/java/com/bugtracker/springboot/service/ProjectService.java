@@ -44,19 +44,26 @@ public class ProjectService
         return projectRepo.save(project);
     }
 
-    public void deleteProject(Long id)
+    public void deleteProject(String id)
     {
-        projectRepo.deleteById(id);
+        Project project = projectRepo.findByProjectIdentifier(id.toUpperCase());
+        if(project == null){
+            throw  new  ProjectIdException("Cannot Project with ID '"+id+"'. This project does not exist");
+        }
+        projectRepo.deleteById(project.getProject_id());
     }
 
     //read project by id
-    public Project byId(Long id)
+    public Project byId(String id)
     {
-        Optional<Project> project = projectRepo.findById(id);
-        if(!project.isPresent()){
-            throw new RuntimeException("Project isn't present");
+
+        Project project = projectRepo.findByProjectIdentifier(id.toUpperCase());
+
+        if(project == null){
+            throw new ProjectIdException("Project ID '"+id+"' does not exist");
+
         }
-        return project.get();
+        return project;
     }
 
 
