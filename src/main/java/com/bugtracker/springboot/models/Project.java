@@ -33,5 +33,7 @@ public class Project implements Serializable
     private Set<Bug> todos;
     private Date startedAt;
     private Date createdOn;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    private Backlog backlog;
 
 }

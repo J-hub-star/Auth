@@ -3,7 +3,9 @@ package com.bugtracker.springboot.service;
 
 import com.bugtracker.springboot.dto.ProjectDto;
 import com.bugtracker.springboot.extras.ProjectIdException;
+import com.bugtracker.springboot.models.Backlog;
 import com.bugtracker.springboot.models.Project;
+import com.bugtracker.springboot.repository.BacklogRepo;
 import com.bugtracker.springboot.repository.ProjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,27 @@ public class ProjectService
     @Autowired
     private ProjectRepo projectRepo;
 
+    @Autowired
+    private BacklogRepo backlogRepo;
+
     public Project createProject(Project project)
     {
         try{
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+
+            if(project.getProject_id()==null){
+                Backlog backlog = new Backlog();
+                project.setBacklog(backlog);
+                backlog.setProject(project);
+                backlog.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            }
+
+            if(project.getProject_id()!=null){
+                project.setBacklog(backlogRepo.findByProjectIdentifier(project.getProjectIdentifier().toUpperCase()));
+            }
+
             return projectRepo.save(project);
+
         }catch (Exception e){
             throw new ProjectIdException("Project ID '"+project.getProjectIdentifier().toUpperCase()+"' already exists");
         }
