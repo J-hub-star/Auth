@@ -1,6 +1,7 @@
 package com.bugtracker.springboot.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,14 +27,10 @@ public class Project implements Serializable
     @NotNull(message = "Identifier has to be unique")
     @Column(updatable = false, unique = true)
     private String projectIdentifier;
-    //bidirectional relational model
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "project")
-    private Set<Bug> bugs;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "project")
-    private Set<Bug> todos;
     private Date startedAt;
     private Date createdOn;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    @JsonIgnore
     private Backlog backlog;
 
 }
