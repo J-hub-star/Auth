@@ -25,7 +25,7 @@ public class Project implements Serializable
     @NotNull(message = "Repository Link is required")
     private String github_link;
     @NotNull(message = "Identifier has to be unique")
-    @Column(updatable = false, unique = true)
+    @Column(updatable = false)
     private String projectIdentifier;
     private Date startedAt;
     private Date createdOn;

@@ -2,7 +2,7 @@ package com.bugtracker.springboot.service;
 
 
 import com.bugtracker.springboot.dto.ProjectDto;
-import com.bugtracker.springboot.extras.ProjectIdException;
+import com.bugtracker.springboot.utility.ProjectIdException;
 import com.bugtracker.springboot.models.Backlog;
 import com.bugtracker.springboot.models.Project;
 import com.bugtracker.springboot.repository.BacklogRepo;
@@ -54,11 +54,11 @@ public class ProjectService
         return projectRepo.findAll();
     }
 
-    //update a project
-    public Project updateProject(ProjectDto projectDto){
-        Project project = new Project();
-        project.setProject_name(projectDto.getName());
-        project.setGithub_link(projectDto.getLink());
+    public Project updateProject(String id,Project projectRb)
+    {
+        Project project = projectRepo.findByProjectIdentifier(id.toUpperCase());
+        project.setProject_name(projectRb.getProject_name());
+        project.setGithub_link(projectRb.getGithub_link());
         return projectRepo.save(project);
     }
 
