@@ -99,10 +99,6 @@ public class ProjectTaskService {
 
     public void deletePTByProjectSequence(String backlog_id, String pt_id){
         ProjectTasks projectTask = findPTByProjectSequence(backlog_id, pt_id);
-        Backlog backlog = projectTask.getBacklog();
-        List<ProjectTasks> pts = backlog.getProjectTasks();
-        pts.remove(projectTask);
-        backlogRepository.save(backlog);
         projectTaskRepository.delete(projectTask);
     }
 }
